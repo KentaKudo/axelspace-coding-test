@@ -3,7 +3,8 @@ from typing import Dict
 
 def make_km_table(pattern: str) -> Dict[str, int]:
     table = dict()
-    raise Exception("TODO")
+    for i in range(len(pattern)):
+        table[pattern[i]] = 1 # TODO: calc slide width
     return table
 
 
@@ -11,11 +12,12 @@ class Bm(object):
     def __init__(self, text: str, pattern: str):
         self.text = text
         self.pattern = pattern
-        # self.table = make_km_table(pattern)
+        self.table = make_km_table(pattern)
 
     def decide_slide_width(self, c: str) -> int:
         assert len(c) == 1
-        return 1
+        slide_width = self.table.get(c)
+        return slide_width if slide_width is not None else len(self.pattern)
 
     def search(self) -> int:
         m = len(self.pattern)
