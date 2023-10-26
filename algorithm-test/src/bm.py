@@ -21,18 +21,23 @@ class Bm(object):
     def search(self) -> int:
         m = len(self.pattern)
         n = len(self.text)
-        if m == 0 or n == 0 or n < m:
-            return -1
+        assert m > 0 and n > 0 and n >= m
         
-        for i in range(n - m + 1):
-            if self.match_at(i):
-                return i            
+        i = 0
+        while i < n - m + 1:
+            if self.match_at(i) == -1:
+                return i
+            i += 1
 
         return -1
     
-    def match_at(self, i) -> bool:
+    """
+    match_at returns -1 if the pattern matches at i.
+    Otherwise returns the index in the pattern where the mismatch happens.
+    """
+    def match_at(self, i) -> int:
         m = len(self.pattern)
-        for j in range(m):
+        for j in reversed(range(m)):
             if self.text[i + j] != self.pattern[j]:
-                return False            
-        return True
+                return j
+        return -1
