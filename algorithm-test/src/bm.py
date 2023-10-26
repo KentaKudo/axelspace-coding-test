@@ -15,8 +15,7 @@ class Bm(object):
 
     def decide_slide_width(self, c: str) -> int:
         assert len(c) == 1
-        raise Exception("TODO")
-        return -1
+        return 1
 
     def search(self) -> int:
         m = len(self.pattern)
@@ -25,9 +24,12 @@ class Bm(object):
         
         i = 0
         while i < n - m + 1:
-            if self.match_at(i) == -1:
+            mismatch_idx = self.match_at(i)
+            if mismatch_idx == -1:
                 return i
-            i += 1
+            
+            slide_width = self.decide_slide_width(self.text[i + mismatch_idx])
+            i += slide_width
 
         return -1
     
