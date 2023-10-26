@@ -43,6 +43,13 @@ class TestExample(DbTest):
         )
 
         sql = """
+        SELECT SUM(CASE WHEN e.sales_organization_id IS NOT NULL THEN 1 ELSE 0 END) as subordinates_count,
+               o.id as id
+          FROM organizations as o 
+               LEFT JOIN enterprise_sales_enterprise_customers e
+                      ON o.id = e.sales_organization_id
+         GROUP BY o.id
+         ORDER BY o.id
         """
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)

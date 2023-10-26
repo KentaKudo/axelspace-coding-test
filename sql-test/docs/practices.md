@@ -1,5 +1,4 @@
-SQL practices
-===
+# SQL practices
 
 ### ToC
 
@@ -9,7 +8,7 @@ SQL practices
 
 # Practice 1
 
-- Count the number of subordinate 'ENTERPRISE\_CUSTOMER' organizations for each organization.
+- Count the number of subordinate 'ENTERPRISE_CUSTOMER' organizations for each organization.
 
 # Practice 2
 
@@ -30,26 +29,11 @@ SQL practices
         "type": "Polygon",
         "coordinates": [
           [
-            [
-              130.27313232421875,
-              30.519681272749402
-            ],
-            [
-              131.02020263671875,
-              30.519681272749402
-            ],
-            [
-              131.02020263671875,
-              30.80909017893796
-            ],
-            [
-              130.27313232421875,
-              30.80909017893796
-            ],
-            [
-              130.27313232421875,
-              30.519681272749402
-            ]
+            [130.27313232421875, 30.519681272749402],
+            [131.02020263671875, 30.519681272749402],
+            [131.02020263671875, 30.80909017893796],
+            [130.27313232421875, 30.80909017893796],
+            [130.27313232421875, 30.519681272749402]
           ]
         ]
       }
