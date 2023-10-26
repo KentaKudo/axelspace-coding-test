@@ -95,6 +95,10 @@ class TestExample(DbTest):
         )
 
         sql = """
+        SELECT id,
+               ST_X(ST_Centroid(bounds)) as longitude,
+               ST_Y(ST_Centroid(bounds)) as latitude
+          FROM japan_segments
         """
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)
