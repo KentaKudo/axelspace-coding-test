@@ -165,8 +165,33 @@ class TestExample(DbTest):
             os.path.join(PATH_TO_SQL_DIR, "japan_segments.sql")
         )
 
-        sql = """
+        aoi = """
+        {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [130.27313232421875, 30.519681272749402],
+                    [131.02020263671875, 30.519681272749402],
+                    [131.02020263671875, 30.80909017893796],
+                    [130.27313232421875, 30.80909017893796],
+                    [130.27313232421875, 30.519681272749402]
+                ]
+            ],
+            "crs":{
+                "type": "name",
+                "properties": {
+                    "name": "EPSG:4326"
+                }
+            }
+        }
         """
+
+        sql = """
+        SELECT id
+          FROM japan_segments
+         WHERE ST_Contains(ST_GeomFromGeoJSON('%s'), bounds)
+        """ % (aoi)
+
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(sql)
             actual = cur.fetchall()
