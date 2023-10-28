@@ -30,11 +30,13 @@ class Bm(object):
 
             slide_width = self.decide_slide_width(
                 self.text[i + mismatch_idx])
-            i = i + mismatch_idx + slide_width - (m - 1)
+
+            delta_i = self.delta_i(slide_width, mismatch_idx)
+            i += delta_i
 
         return -1
 
-    def match_at(self, i) -> int:
+    def match_at(self, i: int) -> int:
         """
         match_at returns -1 if the pattern matches at i.
         Otherwise returns the index in the pattern where the mismatch happens.
@@ -44,3 +46,11 @@ class Bm(object):
             if self.text[i + j] != self.pattern[j]:
                 return j
         return -1
+
+    def delta_i(self, slide_width: int, mismatch_idx: int) -> int:
+        """
+        delta_i calculates the actual slide amount based on the slide width of the mismatched character
+        and the position where the mismatch happens.
+        """
+        match_length = len(self.pattern) - (mismatch_idx + 1)
+        return max(1, slide_width - match_length)
