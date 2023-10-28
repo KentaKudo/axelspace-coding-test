@@ -3,7 +3,7 @@ from typing import Dict
 
 def make_km_table(pattern: str) -> Dict[str, int]:
     table = dict()
-    for i in range(len(pattern) - 1):
+    for i in range(len(pattern)):
         table[pattern[i]] = len(pattern) - i - 1
     return table
 
